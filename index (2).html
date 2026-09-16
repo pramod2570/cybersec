@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Scan — exposure lookup</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="wrap">
+
+    <header class="head">
+      <div class="mark">
+        <span class="mark-glyph">◆</span>
+        <span class="mark-word">Email Scan</span>
+      </div>
+      <span class="mode-pill mode-{{ mode }}">
+        {{ "live · have i been pwned" if mode == "live" else "simulated data" }}
+      </span>
+    </header>
+
+    <section class="hero">
+      <h1>Scan for exposure</h1>
+      <p class="sub">Check whether an address has surfaced in a known data breach. No passwords involved — ever.</p>
+    </section>
+
+    <form id="scan-form" class="console" autocomplete="off">
+      <label for="email" class="visually-hidden">Email address</label>
+      <div class="prompt-row" id="prompt-row">
+        <span class="prompt-glyph">&gt;</span>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+        >
+        <span class="scanline" id="scanline"></span>
+      </div>
+
+      <div class="action-row">
+        <button type="submit" class="run-btn" id="run-btn">Run scan</button>
+        <button type="button" class="sample-link" id="example-btn">try a sample address</button>
+      </div>
+    </form>
+
+    <section id="result" class="result" hidden></section>
+
+    <p class="disclaimer">
+      We never ask for or store passwords. Your email is used only to run this lookup — it isn't logged or saved anywhere.
+    </p>
+
+  </div>
+
+  <footer class="footer">
+    <span>Privacy-first breach lookup</span>
+    <span>No passwords · Not logged · Rate-limited</span>
+  </footer>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
